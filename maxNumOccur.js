@@ -1,6 +1,6 @@
 
 
-const nums = [-3, -2, -3]
+const nums = [5, 2, 4, 5, 4, 5]
 
 let maxNum = -Infinity;
 let maxSum = -Infinity
