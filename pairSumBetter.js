@@ -21,3 +21,6 @@ function findPairSum(nums, target) {
 }
 const nums = [2, 7, 11, 15]
 console.log(findPairSum(nums, 26));
+
+console.log(Math.floor(5 / 2));
+
