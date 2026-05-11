@@ -26,7 +26,7 @@ for (let i = 0; i < stock.length; i++) {
     minPrice = Math.min(minPrice, stock[i]);
 }
 
-console.log("Maximum Profit:", maxProfit);
+console.log("Maximum Profits:", maxProfit);
 
 // ============================================================
 // STEP-BY-STEP TRACE
