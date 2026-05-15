@@ -19,43 +19,44 @@ var sumOfMultiples = function (n) {
 };
 
 /**
- * অপ্টিমাইজড সমাধান - O(1)
- * Inclusion-Exclusion Principle ব্যবহার করে
+ * অপ্টিমাইজড সমাধান - আরো সহজভাবে
  * 
- * ধারণা:
- * sum(3) + sum(5) + sum(7)     // তিনটি যোগ করি
- * - sum(15) - sum(21) - sum(35) // যা দুইবার গণনা হয়েছে বাদ দিই
- * + sum(105)                    // যা তিনবার বাদ দেওয়া হয়েছে একবার যোগ করি
- * 
- * @param {number} n - আপার লিমিট
- * @return {number} যোগফল
+ * মূল ধারণা: একটি সূত্র ব্যবহার করে সরাসরি উত্তর বের করি
+ * লুপ করার দরকার নেই!
  */
-var sumOfMultiplesOptimized = function (n) {
-    /**
-     * সাহায্যকারী ফাংশন: d দ্বারা বিভাজ্য সংখ্যাগুলোর যোগফল
-     * 
-     * উদাহরণ: n=10, d=3
-     * বিভাজ্য: 3, 6, 9 = 3×1, 3×2, 3×3
-     * যোগফল = 3×(1+2+3) = 3 × (3×4/2) = 18
-     * 
-     * সূত্র: d × count × (count + 1) / 2
-     * যেখানে count = floor(n/d)
-     */
-    const sumDivisible = (d, num) => {
-        const count = Math.floor(num / d);
-        return d * count * (count + 1) / 2;
-    };
+var sumOfMultiplesSimple = function (n) {
 
-    // Inclusion-Exclusion Principle প্রয়োগ করি
-    return (
-        sumDivisible(3, n) +          // 3 এর গুণিতক যোগ করি
-        sumDivisible(5, n) +          // 5 এর গুণিতক যোগ করি
-        sumDivisible(7, n) -          // 7 এর গুণিতক যোগ করি
-        sumDivisible(15, n) -         // 15 (3×5) বাদ দিই (দুইবার গণনা)
-        sumDivisible(21, n) -         // 21 (3×7) বাদ দিই (দুইবার গণনা)
-        sumDivisible(35, n) +         // 35 (5×7) বাদ দিই (দুইবার গণনা)
-        sumDivisible(105, n)          // 105 (3×5×7) যোগ করি (তিনবার বাদ দেওয়া)
-    );
+    // ধাপ ১: সাহায্যকারী ফাংশন - "কোন সংখ্যা দ্বারা কতটি গুণিতক আছে এবং তাদের যোগফল কত?"
+    function getSum(divisor, limit) {
+        // উদাহরণ: getSum(3, 10)
+        // 3 এর গুণিতক: 3, 6, 9
+        // কতটি আছে: 10 ÷ 3 = 3 টি
+
+        const count = Math.floor(limit / divisor);  // কতটি সংখ্যা আছে
+
+        // যোগফল = divisor × (1 + 2 + 3 + ... + count)
+        //        = divisor × count × (count + 1) / 2
+        // উদাহরণ: 3 × (1+2+3) = 3 × 3 × 4 / 2 = 18
+
+        const sum = divisor * count * (count + 1) / 2;
+
+        return sum;
+    }
+
+    // ধাপ ২: তিনটি সংখ্যার গুণিতক যোগ করি
+    let result = getSum(3, n) + getSum(5, n) + getSum(7, n);
+
+    // ধাপ ৩: কিছু সংখ্যা দুইবার গণনা হয়েছে, তাদের বাদ দিই
+    //        15 = 3 এবং 5 উভয়ের গুণিতক
+    //        21 = 3 এবং 7 উভয়ের গুণিতক
+    //        35 = 5 এবং 7 উভয়ের গুণিতক
+    result = result - getSum(15, n) - getSum(21, n) - getSum(35, n);
+
+    // ধাপ ৪: 105 = 3, 5, 7 এর গুণিতক
+    //        এটি তিনবার বাদ দেওয়া হয়েছে, একবার যোগ করতে হবে
+    result = result + getSum(105, n);
+
+    return result;
 };
 
 // ============== টেস্ট কেস ==============
@@ -72,12 +73,12 @@ console.log("=== টেস্ট রেজাল্ট ===\n");
 
 testCases.forEach(({ n, expected }) => {
     const brute = sumOfMultiples(n);
-    const optimized = sumOfMultiplesOptimized(n);
-    const status = brute === optimized && brute === expected ? "✓" : "✗";
+    const simple = sumOfMultiplesSimple(n);
+    const status = brute === simple && brute === expected ? "✓" : "✗";
 
     console.log(`${status} n=${n}:`);
     console.log(`   ব্রুট ফোর্স: ${brute}`);
-    console.log(`   অপ্টিমাইজড: ${optimized}`);
+    console.log(`   সহজ অপ্টিমাইজড: ${simple}`);
     console.log(`   প্রত্যাশিত: ${expected}\n`);
 });
 
@@ -90,8 +91,8 @@ console.time("ব্রুট ফোর্স (O(n))");
 const bruteLarge = sumOfMultiples(largeN);
 console.timeEnd("ব্রুট ফোর্স (O(n))");
 
-console.time("অপ্টিমাইজড (O(1))");
-const optimizedLarge = sumOfMultiplesOptimized(largeN);
-console.timeEnd("অপ্টিমাইজড (O(1))");
+console.time("সহজ অপ্টিমাইজড (O(1))");
+const simpleLarge = sumOfMultiplesSimple(largeN);
+console.timeEnd("সহজ অপ্টিমাইজড (O(1))");
 
-console.log(`\nফলাফল মিলেছে: ${bruteLarge === optimizedLarge ? "হ্যাঁ" : "না"}\n`);
+console.log(`\nফলাফল মিলেছে: ${bruteLarge === simpleLarge ? "হ্যাঁ" : "না"}\n`);
