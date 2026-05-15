@@ -4,24 +4,19 @@
  */
 var triangleType = function (nums) {
 
-    let count = 0
-    console.log(nums);
 
-    for (let i = 0; i < nums.length - 1; i++) {
-        console.log(i);
-        console.log(i + 1);
 
-        // if (nums[i] === nums[i + 1]) count++
+    if (nums[0] + nums[1] <= nums[2] || nums[1] + nums[2] <= nums[0] || nums[0] + nums[2] <= nums[1]) return "none"
+
+
+    if (nums[0] === nums[1] && nums[1] === nums[2]) {
+        return "equilateral";
+    } else if (nums[0] === nums[1] || nums[1] === nums[2] || nums[0] === nums[2]) {
+        return "isosceles";
+    } else {
+        return "scalene";
     }
-
-    // if (count === 3) {
-    //     return "equilateral"
-    // } else if (count === 2) {
-    //     return "isosceles"
-    // } else {
-    //     return "scalene"
-    // }
 
 };
 
-console.log(triangleType[3, 4, 5]);
+console.log(triangleType([8, 4, 2]));
