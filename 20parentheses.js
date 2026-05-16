@@ -3,75 +3,25 @@
  * @return {boolean}
  */
 var isValid = function (s) {
+    const stack = []
 
-    if (typeOfBracket(s[0]) === "closing") return false
+    const map = {
+        ')': '(',
+        '}': '{',
+        ']': '[',
+    }
 
-
-    function typeOfBracket(char) {
+    for (let char of s) {
         if (char === '(' || char === '{' || char === '[') {
-            return "opening"
-        } else if (char === ')' || char === '}' || char === ']') {
-            return "closing"
-        }
-    }
-
-    function typeOfClosing(char) {
-        if (char === ')') {
-            return "fClosing"
-        } else if (char === '}') {
-            return "sClosing"
+            stack.push(char)
         } else {
-            return "tClosing"
-        }
-    }
-
-    function typeOfTest(char) {
-        if (char === '(') {
-            return "fClosing"
-        } else if (char === '{') {
-            return "sClosing"
-        } else {
-            return "tClosing"
-        }
-    }
-
-    let arr = []
-
-    for (let bra of s) {
-        if (typeOfBracket(bra) === "opening") {
-            console.log(typeOfBracket(bra));
-
-            arr.push(bra)
-            console.log("push", bra);
-            console.log("push", arr);
-
-
-        } else {
-            console.log(typeOfBracket(bra));
-            console.log("bra", bra);
-
-            console.log("list", arr);
-
-            console.log(typeOfClosing(arr.at(-1)));
-
-
-            if (typeOfClosing(bra) === typeOfTest(arr.at(-1))) {
-
-                arr.pop()
-                console.log("pop", arr);
-
-            } else {
-
+            if (stack.length === 0 || stack.pop() !== map[char]) {
                 return false
             }
         }
     }
 
-    if (arr.length === 0) {
-        return true
-    } else {
-        return false
-    }
+    return stack.length === 0
 
 };
 
