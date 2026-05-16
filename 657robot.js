@@ -17,16 +17,26 @@ var judgeCircle = function (moves) {
     //     return false
     // }
 
-    let r = 0, l = 0, u = 0, d = 0;
+    // let r = 0, l = 0, u = 0, d = 0;
+
+    // for (let move of moves) {
+    //     if (move === 'R') r++;
+    //     else if (move === "L") l++
+    //     else if (move === 'U') u++
+    //     else d++
+    // }
+    // return r === l && u === d;
+
+    let x = 0, y = 0;
 
     for (let move of moves) {
-        if (move === 'R') r++;
-        else if (move === "L") l++
-        else if (move === 'U') u++
-        else d++
+        if (move === 'R') x++;
+        else if (move === "L") x--
+        else if (move === 'U') y++
+        else y--
     }
-    return r === l && u === d;
 
+    return x === 0 && y === 0
 
 
 
