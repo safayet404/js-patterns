@@ -4,14 +4,33 @@
  */
 var judgeCircle = function (moves) {
 
-    if (moves[0] === "R" && moves[1] === "L" || moves[0] === "L" && moves[1] === "R") {
-        return true
-    } else if (moves[0] === "U" && moves[1] === "D" || moves[0] === "D" && moves[1] === "U") {
-        return true
-    } else {
-        return false
+    // const obj = {}
+    // for (let move of moves) {
+    //     obj[move] = (obj[move] || 0) + 1
+    // }
+    // console.log(obj);
+
+
+    // if (obj["U"] === obj["D"] && obj["R"] === obj["L"]) {
+    //     return true
+    // } else {
+    //     return false
+    // }
+
+    let r = 0, l = 0, u = 0, d = 0;
+
+    for (let move of moves) {
+        if (move === 'R') r++;
+        else if (move === "L") l++
+        else if (move === 'U') u++
+        else d++
     }
+    return r === l && u === d;
+
+
+
+
 
 };
 
-console.log(judgeCircle("UL"));
+console.log(judgeCircle("UDRLR"));
