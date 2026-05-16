@@ -1,10 +1,10 @@
 /**
  * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
  */
+function ListNode(val, next = null) {
+    this.val = (val === undefined ? 0 : val)
+    this.next = next
+}
 /**
  * @param {ListNode} list1
  * @param {ListNode} list2
@@ -12,20 +12,39 @@
  */
 var mergeTwoLists = function (list1, list2) {
 
+    let dummy = new ListNode(0)
+    let current = dummy
 
-    let number = []
+    while (list1 && list2) {
+        if (list1.val <= list2.val) {
+            current.next = list1
+            list1 = list1.next
+        } else {
+            current.next = list2
+            list2 = list2.next
+        }
+        current = current.next
+    }
 
-    list1.forEach(el => {
-        number.push(el)
-    });
-    list2.forEach(el => {
-        number.push(el)
-    });
+    current.next = list1 || list2
 
+    return dummy.next
 
-    return number.sort((a, b) => a - b)
 
 
 };
 
-console.log(mergeTwoLists([1, 2, 4], [1, 3, 4]));
+// Test case: Linked list nodes তৈরি করি
+let list1 = new ListNode(1, new ListNode(2, new ListNode(4)));
+let list2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+
+let result = mergeTwoLists(list1, list2);
+
+// Result print করি
+let current = result;
+let output = [];
+while (current) {
+    output.push(current.val);
+    current = current.next;
+}
+console.log(output);  // [1, 1, 2, 3, 4, 4]
