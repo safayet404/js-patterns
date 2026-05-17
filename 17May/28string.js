@@ -6,13 +6,15 @@
 var strStr = function (haystack, needle) {
 
 
-    for (let i = 0; i < haystack.length - (needle.length - 1); i++) {
-        console.log(haystack.substring(i, needle.length));
+    // for (let i = 0; i < haystack.length - needle.length; i++) {
+    //     console.log(haystack.substring(i, needle.length));
 
-        if (haystack.substring(i, i + needle.length) === needle) return i
-    }
+    //     if (haystack.substring(i, i + needle.length) === needle) return i
+    // }
 
-    return -1
+    // return -1
+
+    return haystack.indexOf(needle)
 
     // let i = 0
     // while (i !== haystack.length) {
