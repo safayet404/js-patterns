@@ -5,16 +5,28 @@
  */
 var strStr = function (haystack, needle) {
 
-    // for (let i = 0; i < haystack.length - 2; i++)
-    // {
-    //     if(haystack[])
+
+    for (let i = 0; i < haystack.length - (needle.length - 1); i++) {
+        console.log(haystack.substring(i, needle.length));
+
+        if (haystack.substring(i, i + needle.length) === needle) return i
+    }
+
+    return -1
+
+    // let i = 0
+    // while (i !== haystack.length) {
+    //     console.log(haystack.substring(i, needle.length));
+    //     console.log(i);
+
+    //     if (haystack.substring(i, i + needle.length) === needle) return i
+
+    //     i += needle.length
     // }
 
-    let test = "sadbutsad"
-    console.log(test.slice(test.length));
-
+    // return -1
 
 
 };
 
-console.log(strStr("sadbutsad", "sad"));
+console.log(strStr("mississippi", "issi"));
