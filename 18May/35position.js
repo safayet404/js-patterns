@@ -7,23 +7,28 @@ var searchInsert = function (nums, target) {
 
     let left = 0
     let right = nums.length - 1
-    let mid = Math.floor(nums.length / 2)
 
-    for (let i = 0; i < nums.length; i++) {
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2)
 
         if (nums[mid] === target) {
             return mid
         } else if (nums[mid] > target) {
+
             right = mid - 1
-            mid = Math.floor((left + right) / 2)
+
+
         } else {
+
             left = mid + 1
-            mid = Math.floor((left + right) / 2)
+
         }
     }
+
+    return left
 
 
 
 };
 
-console.log(searchInsert([1, 3, 5, 6], 6));
+console.log(searchInsert([1, 3, 5, 6, 7, 9, 10], 2));
