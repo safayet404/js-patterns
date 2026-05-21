@@ -8,17 +8,27 @@ var intersection = function (nums1, nums2) {
     const setA = new Set(nums1)
     const setB = new Set(nums2)
 
-    const matched = setA.intersection(setB)
-    console.log(matched);
+    // const matched = setA.intersection(setB)
+    // console.log(matched);
 
-    const matchedArray = Array.from(matched)
-    console.log(matchedArray);
+    // const matchedArray = Array.from(matched)
+    // console.log(matchedArray);
 
-    const array = [...setA].filter(item => setB.has(item))
-    console.log("test", test);
+    // const array = [...setA].filter(item => setB.has(item))
+    // console.log("test", test);
 
 
-    return array
+    // return array
+
+    let matchedArray = []
+
+    for (let item of setA) {
+        if (setB.has(item)) {
+            matchedArray.push(item)
+        }
+    }
+
+    return matchedArray
 
 
 
