@@ -5,6 +5,10 @@
  */
 var intersection = function (nums1, nums2) {
 
+    if (nums1.length > nums2.length) {
+        return intersect(nums2, nums1);
+    }
+
     const count = {}
     const result = []
 
@@ -18,7 +22,6 @@ var intersection = function (nums1, nums2) {
         if (count[num] > 0) {
             result.push(num)
             count[num]--
-            console.log("test", count);
 
         }
     }
