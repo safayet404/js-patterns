@@ -14,7 +14,11 @@ var intersection = function (nums1, nums2) {
     const matchedArray = Array.from(matched)
     console.log(matchedArray);
 
-    return matchedArray
+    const array = [...setA].filter(item => setB.has(item))
+    console.log("test", test);
+
+
+    return array
 
 
 
