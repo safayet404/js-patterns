@@ -20,11 +20,11 @@ var findDisappearedNumbers = function (nums) {
         }
     }
 
-    console.log("disappear", missing);
+    console.log("disappear arrays", missing);
 
 
 
 
-};
+}
 
 console.log(findDisappearedNumbers([4, 3, 2, 7, 8, 2, 3, 1, 0]));
