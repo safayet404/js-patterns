@@ -20,7 +20,7 @@ var findDisappearedNumbers = function (nums) {
         }
     }
 
-    console.log("disappear arrays", missing);
+    console.log("disappear", missing);
 
 
 
