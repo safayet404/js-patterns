@@ -25,4 +25,4 @@ var deleteDuplicates = function (head) {
 
 };
 
-console.log(deleteDuplicates([[1, 1, 2]]));
+deleteDuplicates([[1, 1, 2]])
