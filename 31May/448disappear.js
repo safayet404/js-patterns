@@ -26,5 +26,5 @@ var findDisappearedNumbers = function (nums) {
 
 
 }
-// lets see
+// lets see the output 
 console.log(findDisappearedNumbers([4, 3, 2, 7, 8]));
